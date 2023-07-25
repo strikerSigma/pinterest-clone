@@ -5,7 +5,7 @@ import Layout from '@/components/Layout'
 const page = () => {
   return (
     <div>
-        <div class="flex justify-center mt-10">
+        <div class="flex justify-center mt-20">
         <Image src="/user.png" width={180} height={180}/>
         </div>
         <div class="flex justify-center mt-5 text-4xl font-bold">Username</div>

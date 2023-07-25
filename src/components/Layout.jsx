@@ -4,7 +4,7 @@ import Pin from './Pin'
 
 const Layout = () => {
   return (
-    <div className='Pin_container'>
+    <div className='Pin_container my-20 md:my-0'>
         <Pin pin="small" url="/Sample1.jpg"/>
         <Pin pin="medium"  url="/Sample2.jpg"/>
         <Pin pin="large"  url="/Sample3.jpg"/>     
