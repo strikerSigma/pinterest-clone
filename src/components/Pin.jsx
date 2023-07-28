@@ -16,7 +16,7 @@ const Pin = (props) => {
 
   return (
     <div  className='pin' style={style[props.pin]}>
-        <img src={props.url} className='rounded-xl' style={{ width: '100%', height: '100%' }}/>
+        <img src={props.post.url} alt={props.post.desc} className='rounded-xl' style={{ width: '100%', height: '100%' }}/>
      </div>
   )
 }

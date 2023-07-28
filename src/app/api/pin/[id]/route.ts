@@ -1,23 +1,21 @@
-import { deletePost, getPost, updatePost } from "@/lib/handlers"
+import { deletePost, getPost, updatePost } from "../../../../lib/handlers"
 import { NextResponse } from "next/server"
 
-export const GET = async (req: Request, res: Response)=>{
-    try{
-        const id = req.url.split('/pin/')[1];
-    console.log(id);
-    const post = getPost(id);
-       if(post){
-        return NextResponse.json({mesage: "OK", post},{status: 200})
-       }
-       else{
-        return NextResponse.json({mesage: "ERROR", post:[]},{status: 404})
-       }
+export const GET = async (req: Request, res: Response) => {
+    try {
+      const url = req.url.split('/pin/')[1];
+      console.log(url);
+      const post = await getPost(url);
+  
+      if (post) {
+        return NextResponse.json({ message: "OK", post }, { status: 200 });
+      } else {
+        return NextResponse.json({ message: "Post not found" }, { status: 404 });
+      }
+    } catch (err) {
+      return NextResponse.json({ message: err.message }, { status: 500 });
     }
-    catch(err){
-       return NextResponse.json({message: err.message},{status:404})
-    }
-
-}
+  };
 
 export const PUT = async (req: Request, res: Response)=>{
     try{
@@ -33,8 +31,8 @@ export const PUT = async (req: Request, res: Response)=>{
 
 export const DELETE =  async (req: Request, res: Response) => {
     try{
-        const id = req.url.split('/pin/')[1];
-        deletePost(id);
+        const url = req.url.split('/pin/')[1];
+        await deletePost(url);
        return NextResponse.json({mesage: "OK"},{status: 200})
     }
     catch(err){

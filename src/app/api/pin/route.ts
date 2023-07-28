@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 
 export async function GET(req: Request, res: Response){
     try{
-        const posts = getPosts();
+        const posts =await getPosts();
         console.log({mesage: 200, posts},{status: 200})
        return NextResponse.json({mesage: "OK", posts},{status: 200})
     }
@@ -14,9 +14,10 @@ export async function GET(req: Request, res: Response){
 
 export const POST =  async (req: Request, res: Response) => {
     try{
-        const {title,desc} =await req.json();
-        const post = {title,desc,date: new Date(),id: Date.now().toString()}
-        createPost(post)
+        const {title,desc,author,url} =await req.json();
+        const post = {title,desc,date: new Date(),author,url}
+        await createPost(post)
+        console.log(post)
        return NextResponse.json({mesage: "OK", post},{status: 201})
     }
     catch(err){
