@@ -38,7 +38,8 @@ body{
   margin: 15px 10px;
   padding: 0;
   border-radius: 16px;
-  background-color: red;
+  background: linear-gradient(180deg, #DF4264 0%, #FF8C72 100%);
+
 }
 .navup{
   background: linear-gradient(180deg, rgba(252, 255, 254, 0.40) 0%, rgba(252, 255, 254, 0.00) 100%);
@@ -51,6 +52,24 @@ body{
 .input{
   margin-top: 10px;
   background-color: rgb(105, 105, 105);
+}
+.overlay{
+  background: rgba(15, 20, 14, 0.80);
+  transition-delay: 200ms;
+}
+.overlay:hover{
+  opacity: 100%;
+}
+.container{
+  max-width: 90vw;
+  margin-left: 50px !important;
+  margin-right: 50px !important;
+}
+.Create{
+  background: linear-gradient(90deg, #FF6B8B 0%, #FFAF57 100%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 @media (max-width: 768px) {
   .nav{

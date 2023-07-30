@@ -1,11 +1,5 @@
 import { connectToMongoDB,client } from "../app/api/mongodb";
-// const connect = async() =>{
-//  const client = await clientPromise;
-//   const db = client.db("nextjs-mongodb-demo");
-//   if(db){
-//     console.log("Connected to MongoDB");
-//   }
-// }
+var ObjectId = require('mongodb').ObjectId; 
 
 type POST ={
     title: string,
@@ -24,10 +18,13 @@ export const getPosts =async ()=>  {
     return posts
 };
 
-export const getPost = async (url:string) => {
+export const getPost = async (id:string) => {
     await connectToMongoDB()
     console.log("Is client connected:", client.isConnected());
-    const post = await client.db("mydb").collection("posts").findOne({url });
+    var o_id = new ObjectId(id);
+    const post = await client.db("mydb").collection("posts").findOne({_id:o_id});
+    console.log(post)
+    
     return post;
   };
 

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Pin = (props) => {
@@ -15,9 +16,11 @@ const Pin = (props) => {
         }
 
   return (
-    <div  className='pin' style={style[props.pin]}>
-        <img src={props.post.url} alt={props.post.desc} className='rounded-xl' style={{ width: '100%', height: '100%' }}/>
-     </div>
+    <Link href={`/Pin/${props.post._id}`}
+     className=' pin cursor-pointer' style={style[props.pin]}>
+        <img src={props.post.url} alt={props.post.desc} className='rounded-xl object-cover PinImg' style={{ width: '100%', height: '100%' }}/>
+        <div>{props.post.title}</div>
+     </Link>
   )
 }
 

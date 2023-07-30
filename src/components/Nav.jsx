@@ -1,5 +1,5 @@
-// "use client"
-// import React, { useState } from 'react'
+"use client"
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
 
@@ -23,12 +23,16 @@ const Nav = () => {
 
         <div  className='pt-2 pl-5 lg:pl-32 cursor-pointer'><Image src="/bell.png" width={25} height={15} /></div>
         <div  className='pt-2 cursor-pointer'><Link href='/Profile'><Image src="/user.png" width={30} height={15} /></Link></div>
+
     </div>
-    <div className='bg-zinc-900 flex space-x-24 text-white w-full md:hidden bottom-0 fixed text-lg font-bold py-2 px-20 underline'>
-        <div><Link href='/'><Image src='/homepage.png' width={20} height={20}/></Link></div>
-        <div><Link href='/Search'><Image src='/glass.png' width={20} height={20}/></Link></div>
-        <div><Link href='/Create'><Image src='/add.png' width={20} height={20}/></Link></div>
-        <div><Link href='/Profile'><Image src='/user1.png' width={20} height={20}/></Link></div>
+    <div ><Link href='/'><img src='/homepage.png'  alt='Icon'/></Link></div>
+
+    <div className='bg-zinc-900 flex space-x-20 md:space-x-28 md:pl-10 text-white w-full lg:hidden bottom-0 fixed text-lg font-bold py-2 px-10 underline'>
+        <div><Link href='/'><img src='/homepage.png'  alt='Icon'/></Link></div>
+        <div><Link href='/Search'><img src='/glass.png'  alt='Icon'/></Link></div>
+        <div><Link href='/Create'><img src='/add.png'  alt='Icon'/></Link></div>
+        
+        <div><Link href='/Profile'><img src='/user1.png'  alt='Icon'/></Link></div>
     </div>
 
     </>
