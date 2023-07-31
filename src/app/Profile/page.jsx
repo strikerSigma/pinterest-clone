@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Layout from '../../components/Layout'
 
-const page = () => {
+const Page = () => {
   return (
     <div>
         <div class="flex justify-center mt-20">
@@ -18,4 +18,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
