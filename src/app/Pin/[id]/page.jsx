@@ -5,7 +5,7 @@ import React from 'react'
 import {useEffect,useState} from 'react'
 import Layout from '../../../components/Layout';
 
-const Page = () => {
+const Pin = () => {
     const [currentUrl, setCurrentUrl] = useState('');
     const [post, setPost] = useState('');
 
@@ -47,4 +47,4 @@ const Page = () => {
           )
 }
 
-export default Page
+export default Pin
