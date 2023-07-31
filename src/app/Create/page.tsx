@@ -63,7 +63,7 @@ export default function UploadDnd() {
       <h1 className="flex justify-center font-bold text-4xl mt-28 Create">Let your Creativity run wild</h1>
       <div className="flex justify-center">
       
-      <main className=" flex min-h-screen flex-col md:flex-row  items-center p-24">
+      <main className=" flex min-h-screen flex-col md:flex-row  items-center p-24 pt-2">
  <UploadDropzone<OurFileRouter>
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {

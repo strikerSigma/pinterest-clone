@@ -22,7 +22,7 @@ const Layout = () => {
         if(rand <= 1) {pin = "large";}
           else if(rand ===2) {pin = "medium";}
           else {pin = "small";}
-          return <Pin pin={pin} post={post}/>
+          return <Pin pin={pin} key={post._id} post={post}/>
           
         })}
         {/* <Pin pin="small" url="/Sample1.jpg"/>
