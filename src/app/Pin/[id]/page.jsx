@@ -4,10 +4,14 @@ import axios from 'axios';
 import React from 'react'
 import {useEffect,useState} from 'react'
 import Layout from '../../../components/Layout';
-
+import { useRouter } from 'next/navigation';
 const Pin = () => {
     const [currentUrl, setCurrentUrl] = useState('');
     const [post, setPost] = useState('');
+    const { push } = useRouter();
+  if(!localStorage.getItem("auth")){
+    push('/Login')
+    }
 
   useEffect(() => {
     setCurrentUrl(window.location.href);

@@ -30,7 +30,7 @@ const Nav = () => {
     </div>
     
 
-    <div className='bg-zinc-900 flex space-x-20 md:space-x-28 md:pl-10 text-white w-full lg:hidden bottom-0 fixed text-lg font-bold py-2 px-10 underline'>
+    <div className='bg-zinc-900 z-10 flex space-x-20  md:pl-10 text-white w-full md:hidden bottom-0 fixed text-lg font-bold py-2 px-10 underline'>
         <div><Link href='/'><img src='/homepage.png'  alt='Icon'/></Link></div>
         <div><Link href='/Search'><img src='/glass.png'  alt='Icon'/></Link></div>
         <div><Link href='/Create'><img src='/add.png'  alt='Icon'/></Link></div>

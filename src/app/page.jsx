@@ -1,23 +1,23 @@
-
+"use client"
 import Layout from '../components/Layout'
 import { SessionProvider } from "next-auth/react"
 
  
 
 export default function Home(
-  // {
-    //   Component,
-    //   pageProps: { session, ...pageProps },
-    // }
+ 
     ) {
+
   
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    
+    }
   return (
     <main >
-      {/* <Component {...pageProps} /> */}
+
       <Layout/>
     </main>
-    // <SessionProvider session={session}>
-      // <Component {...pageProps} />  </SessionProvider>
       
       
       

@@ -2,11 +2,11 @@
  
 // You need to import our styles for the button to look right. Best to import in the root /layout.tsx but this is fine
 import "@uploadthing/react/styles.css";
- 
+import { useRouter } from 'next/navigation';
 import axios from 'axios'
 
 import { useState,useEffect, useRef } from "react";
-import Link from "next/link";
+
 import {  UploadDropzone } from "@uploadthing/react";
 import { OurFileRouter } from "../api/uploadthing/core";
 import { Open_Sans } from 'next/font/google';
@@ -19,9 +19,12 @@ export default function UploadDnd() {
   const [desc,setDesc] = useState<any>();
   const IMG = useRef<any>();
 
+  const { push } = useRouter();
+  if(!localStorage.getItem("auth")){
+    push('/Login')
+    }
 
-
-    const postData = async ( event) => {
+   const postData = async ( event) => {
       event.preventDefault();
       console.log("The image is: "+IMG.current[0].fileUrl)
       try {

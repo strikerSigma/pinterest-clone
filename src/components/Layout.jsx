@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react'
 import Pin from './Pin'
 import axios from 'axios'
 import Link from 'next/link'
-
+import { useRouter } from 'next/navigation';
 
 const Layout = () => {
   const [posts, getPosts] = useState([])
-
+  const { push } = useRouter();
+  console.log(localStorage.getItem("auth"))
+  // if(!localStorage.getItem("auth")){
+  //   push('/Login')
+  //   }
   useEffect(()=>{
     const fetchPosts = async() =>{  await  axios("/api/pin").then(res => getPosts(res.data.posts))}
     fetchPosts();
