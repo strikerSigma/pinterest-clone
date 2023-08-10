@@ -3,13 +3,13 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState,useEffect } from 'react';
+import Image from 'next/image';
 
 const LoginForm = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [user,setUser] = useState();
   const { push } = useRouter();
-
   const handleSubmit = async(e) => {
     e.preventDefault();
     
@@ -19,6 +19,8 @@ const LoginForm = () => {
           password
         }).then(function (response) {
           setUser(response.data.user);
+          alert("Login successful")
+          push('/');
         })
         .catch(function (error) {
           console.log(error);
@@ -26,8 +28,7 @@ const LoginForm = () => {
         localStorage.setItem("userName", userName);
         localStorage.setItem("profilePic", user.profilePic);
 
-        alert("Login successful")
-        push('/');
+        
        
       } catch (error) {
         console.error("Error sending request:", error);
@@ -37,57 +38,31 @@ const LoginForm = () => {
 
     
   };
-  
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Log in to Your Account
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-         
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              
-              <input
-                type="text"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="User name"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
-            <div>
-              
-              <input
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
 
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Sign in
-            </button>
-            <div>Don't have an account yet?<Link className='pl-2 text-sky-600' href='/SignUp'>Sign up</Link></div>
+    <main className="w-full background  " >
 
-          </div>
+     <div className='absolute Loginpg pt-5 max-w-lg'>
+      <div className='logo'></div>
+        <form onSubmit={handleSubmit}>
+        <p className="mt-6  text-5xl pb-10 font-light text-white">
+            Sign in
+          </p>
+            <label className="text-slate-400">Username</label>
+            <input type="text"  className=" appearance-none mb-5 relative block md:w-full px-3 py-2 border-b-2 text-white  bg-inherit focus:outline-none  focus:z-10 sm:text-sm"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}/>
+            <label className="text-slate-400 ">password</label>
+            <input type="password" className=" appearance-none mb-5 relative block md:w-full px-3 py-2 border-b-2 text-white   bg-inherit focus:outline-none  focus:z-10 sm:text-sm"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}/>
+            <button type='Submit' className="mt-4 md:px-24 px-10 py-2 text-md font-semibold rounded-sm text-customRed button focus:outline-none  border-customRed"
+             >Sign in</button>
+        <div className='text-white'>Don't have an account?<Link className='pl-2 text-customRed' href='/SignUp'>Sign up</Link></div>
         </form>
-      </div>
     </div>
+            </main>
   );
 };
 

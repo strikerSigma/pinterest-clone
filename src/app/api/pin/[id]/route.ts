@@ -1,4 +1,4 @@
-import { deletePost, getPost } from "../../../../lib/handlers"
+import { deletePost, getPost } from "../../../../lib/prismaClient"
 import { NextResponse } from "next/server"
 
 export const GET = async (req: Request, res: Response) => {

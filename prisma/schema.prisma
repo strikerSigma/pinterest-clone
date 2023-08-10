@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String             @id @default(uuid())
+  name                String
+  password            String
+  profileUrl          String
+  role                Role               @default(BASIC)
+  writtenPost         Pin[]              @relation("writtenBy")
+  likedPosts          Pin[]              @relation("likedBy")
+  followers_relation  Follower_relation? @relation(fields: [follower_relationId], references: [id])
+  follower_relationId String?            @unique
+  following           Follower_relation? @relation("followers", fields: [followingId], references: [id])
+  followingId         String?
+  followers           Follower_relation? @relation("following", fields: [followersId], references: [id])
+  followersId         String?
+
+  @@unique([password, name])
+}
+
+model Follower_relation {
+  id        String @id
+  User      User?
+  followers User[] @relation("followers")
+  following User[] @relation("following")
+
+  @@map(name: "user")
+}
+
+model Pin {
+  pinId       String   @id @default(uuid())
+  name        String
+  description String
+  imageUrl    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      User     @relation("writtenBy", fields: [authorId], references: [id])
+  authorId    String
+  likedBy     User?    @relation("likedBy", fields: [likedById], references: [id])
+  likedById   String?
+  category    category @relation(fields: [categoryIId], references: [categoryId])
+  categoryIId String
+}
+
+model category {
+  categoryId String @id @default(uuid())
+  name       String @unique
+  Pin        Pin[]
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  BASIC
+}

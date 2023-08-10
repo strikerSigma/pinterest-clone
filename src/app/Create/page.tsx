@@ -20,20 +20,20 @@ export default function UploadDnd() {
   const IMG = useRef<any>();
 
   const { push } = useRouter();
-  if(!localStorage.getItem("auth")){
-    push('/Login')
-    }
-
+  if (!localStorage.getItem("userName")) {
+    push('/Login');
+  }
    const postData = async ( event) => {
       event.preventDefault();
       console.log("The image is: "+IMG.current[0].fileUrl)
+      const {userName}:any = localStorage.getItem("auth")
       try {
         await axios.post("/api/pin", {
           title: Ptitle,
           desc,
           date: new Date(),
-          url: localStorage.getItem("fileUrl") || "fake Url",
-          author: "username",
+          url: localStorage.getItem("fileUrl") ,
+          author: userName,
         }).then(function (response) {
           console.log(response);
         })

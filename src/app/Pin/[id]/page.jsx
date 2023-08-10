@@ -6,12 +6,16 @@ import {useEffect,useState} from 'react'
 import Layout from '../../../components/Layout';
 import { useRouter } from 'next/navigation';
 const Pin = () => {
+const { push } = useRouter();
+  useEffect(() => {
+   
+    if (!localStorage.getItem("userName")) {
+      push('/Login');
+    }
+  }, []);
     const [currentUrl, setCurrentUrl] = useState('');
     const [post, setPost] = useState('');
-    const { push } = useRouter();
-  if(!localStorage.getItem("auth")){
-    push('/Login')
-    }
+    
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -24,8 +28,8 @@ const Pin = () => {
         
         fetchPosts();
         
-    
-        },[url]) 
+      },[url]) 
+      console.log("indvidual post: ",post)
         // useEffect(()=>{
         //     setTimeout(() => {
         //         window.location.reload()
@@ -36,13 +40,13 @@ const Pin = () => {
             <div className='flex flex-col justify-center mt-20'>
              
                 {post && 
-                <div className=' flex justify-center shadow-lg sm:flex rounded-lg pt-10 container'>
-                <div className='flex-1'><img className='object-cover img2 rounded-t-2xl' src={post.url} alt={post.title} /></div>
+                <div className=' md:flex justify-center shadow-lg sm:flex rounded-lg pt-10 container'>
+                <div className='flex-1'><img className='object-cover img2 rounded-t-2xl' src={post.imageUrl} alt={post.name} /></div>
                 <div class="flex-1 pl-2 pt-2">
-                <div className='text-3xl font-semibold'>{post.title}</div>
-                <div>{post.author}</div>
-                <div>{post.desc}</div></div>
-                </div>}{!post && <div className='text-bold text-3xl'>Please Refresh this page!</div>}
+                <div className='text-3xl font-semibold'>{post.name}</div>
+                <div>{post.author.name}</div>
+                <div>{post.description}</div></div>
+                </div>}{!post && <div className='text-bold text-3xl'>Loading...</div>}
                 <div>
                     <Layout/>
                 </div>

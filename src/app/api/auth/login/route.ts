@@ -1,6 +1,6 @@
 
 import {  NextResponse } from 'next/server';
-import {  getUser } from '../../../../lib/userauth';
+import {  getUser } from '../../../../lib/prismaClient';
 
 export const config = {
   api: {

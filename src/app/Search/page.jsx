@@ -3,9 +3,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 const Page = () => {
   const { push } = useRouter();
-  if(!localStorage.getItem("auth")){
-    push('/Login')
-    }
+    useEffect(() => {
+     
+      if (!localStorage.getItem("userName")) {
+        push('/Login');
+      }
+    }, []);
   return (
     <div className='bg-zinc-900 h-full w-full pt-1 search'>
        <div className="relative bg-gray-900 rounded-full py-3 mt-16 mx-20">

@@ -1,22 +1,17 @@
 "use client"
-import Layout from '../components/Layout'
+import Homepg from '../components/Homepg'
 import { SessionProvider } from "next-auth/react"
 
  
 
-export default function Home(
- 
-    ) {
+export default function Home( ) {
 
   
-  if (typeof window !== 'undefined') {
-    // Perform localStorage action
-    
-    }
+
   return (
     <main >
-
-      <Layout/>
+      <Homepg/>
+      
     </main>
       
       
