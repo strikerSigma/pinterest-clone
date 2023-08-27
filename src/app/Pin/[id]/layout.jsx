@@ -1,6 +1,7 @@
 import React from 'react'
-import Nav from '../../../components/Nav'
+import Nav from '../../../components/NavId'
 import SideBar from '../../../components/SideBar'
+import Layout from '../../../components/Layout'
 
 export default function CreateLayout({ children }) {
   
@@ -9,10 +10,12 @@ export default function CreateLayout({ children }) {
 <>
 
         <Nav/>
-        <div className='flex'>
+        <div className='md:flex'>
         <SideBar/>
         {children}
+                     
       </div>
+
 </>
   )
 }

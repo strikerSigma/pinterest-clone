@@ -30,28 +30,23 @@ const { push } = useRouter();
         
       },[url]) 
       console.log("indvidual post: ",post)
-        // useEffect(()=>{
-        //     setTimeout(() => {
-        //         window.location.reload()
-        //     }, 2000); 
-        // },[url])
-    //  {!post && alert("Please Refresh")}  
     return (
-            <div className='flex flex-col justify-center mt-20'>
-             
+      <>
+             <img className='absolute top-0 md:hidden cover ' src={post.imageUrl} alt={post.name} />
+            <div className='flex flex-col justify-center mt-20 mx-10'>
                 {post && 
-                <div className=' md:flex justify-center shadow-lg sm:flex rounded-lg pt-10 container'>
-                <div className='flex-1'><img className='object-cover img2 rounded-t-2xl' src={post.imageUrl} alt={post.name} /></div>
-                <div class="flex-1 pl-2 pt-2">
-                <div className='text-3xl font-semibold'>{post.name}</div>
+                <div className=' justify-center sm:flex relative  container'>
+                <div className='  imagePin hidden md:block'><img className='object-cover ' src={post.imageUrl} alt={post.name} /></div>
+                <div class="flex-1 pl-5 pt-8">
+                <div className='flex justify-between w-full'><div className='text-4xl font-normal'>{post.name}</div>
+                    <button className='bg-customRed absolute top-2 right-2 sm:static rounded-full py-3 px-8 text-white mr-5'>Save</button></div>
                 <div>{post.author.name}</div>
                 <div>{post.description}</div></div>
                 </div>}{!post && <div className='text-bold text-3xl'>Loading...</div>}
-                <div>
-                    <Layout/>
-                </div>
+
 
             </div>
+            </>
           )
 }
 

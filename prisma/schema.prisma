@@ -6,56 +6,72 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id                  String             @id @default(uuid())
-  name                String
-  password            String
-  profileUrl          String
-  role                Role               @default(BASIC)
-  writtenPost         Pin[]              @relation("writtenBy")
-  likedPosts          Pin[]              @relation("likedBy")
-  followers_relation  Follower_relation? @relation(fields: [follower_relationId], references: [id])
-  follower_relationId String?            @unique
-  following           Follower_relation? @relation("followers", fields: [followingId], references: [id])
-  followingId         String?
-  followers           Follower_relation? @relation("following", fields: [followersId], references: [id])
-  followersId         String?
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  username        String?   @unique
+  bio             String?
+  role            Role?     @default(BASIC)
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?
+  profileImage    String?
+  coverImage      String?
+  hashedPassword  String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  followingIds    String[]  @db.ObjectId
+  hasNotification Boolean?
 
-  @@unique([password, name])
-}
-
-model Follower_relation {
-  id        String @id
-  User      User?
-  followers User[] @relation("followers")
-  following User[] @relation("following")
-
-  @@map(name: "user")
+  posts         Pin[]
+  comments      Comment[]
+  notifications Notification[]
 }
 
 model Pin {
-  pinId       String   @id @default(uuid())
-  name        String
-  description String
-  imageUrl    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  author      User     @relation("writtenBy", fields: [authorId], references: [id])
-  authorId    String
-  likedBy     User?    @relation("likedBy", fields: [likedById], references: [id])
-  likedById   String?
-  category    category @relation(fields: [categoryIId], references: [categoryId])
-  categoryIId String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   @db.ObjectId
+  likedIds  String[] @db.ObjectId
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  Comment    Comment[]
+  category   category? @relation(fields: [categoryId], references: [id])
+  categoryId String?   @db.ObjectId
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   @db.ObjectId
+  pinId     String   @db.ObjectId
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Pin  @relation(fields: [pinId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  body      String
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model category {
-  categoryId String @id @default(uuid())
-  name       String @unique
-  Pin        Pin[]
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+  pin  Pin[]
 }
 
 enum Role {
@@ -63,3 +79,59 @@ enum Role {
   EDITOR
   BASIC
 }
+
+///////////////////////
+// model User {
+//   id              String    @id @default(auto()) @map("_id") @db.ObjectId
+//   name            String?
+//   username        String?   @unique
+//   bio             String?
+//   email           String?   @unique
+//   emailVerified   DateTime?
+//   image           String?
+//   profileImage    String?
+//   coverImage      String?
+//   hashedPassword  String?
+//   createdAt       DateTime  @default(now())
+//   updatedAt       DateTime  @updatedAt
+//   followingIds    String[]  @db.ObjectId
+//   hasNotification Boolean?
+
+//   posts         Post[]
+//   comments      Comment[]
+//   notifications Notification[]
+// }
+
+// model Post {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   body      String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   userId    String   @db.ObjectId
+//   likedIds  String[] @db.ObjectId
+
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   Comment Comment[]
+// }
+
+// model Comment {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   body      String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   userId    String   @db.ObjectId
+//   postId    String   @db.ObjectId
+
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+// }
+
+// model Notification {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   body      String
+//   userId    String   @db.ObjectId
+//   createdAt DateTime @default(now())
+
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }

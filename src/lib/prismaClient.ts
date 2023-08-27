@@ -5,6 +5,7 @@ const prisma = new PrismaClient()
 export const getPosts =async ()=>  {
     const posts = await prisma.pin.findMany({include: {category: true}})
     const category = await prisma.category.findMany()
+    await prisma.$disconnect();
     return {posts,category}
 };
 
@@ -17,7 +18,7 @@ export const getPost = async (id:string) => {
         }
     } )
     console.log(post)
-    
+    await prisma.$disconnect();
     return post;
   };
 
@@ -57,6 +58,7 @@ export const createPost = async (post ) => {
         }
     })
     console.log("Post created :"+result);
+    await prisma.$disconnect();
   };
 export const deletePost = async(id:string)=>{
 
@@ -102,3 +104,5 @@ export const createUser = async ({userName,password,profilePic}) => {
     console.log("User SignedUp :"+result);
     return result
   };
+
+prisma.$disconnect();

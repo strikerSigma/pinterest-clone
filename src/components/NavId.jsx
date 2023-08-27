@@ -7,10 +7,7 @@ const Nav = () => {
   
   return (
     <>
-        <div className='fixed top-0  flex justify-between z-20 md:hidden w-full'>
-        <div className='mt-5 ml-5 '><Image src='/logo.png' width={150} height={50}/></div>
-            <div className='text-customRed text-2xl font-bold mt-5 mr-10'><span className='pr-3'>Hi,</span><span>Thomas</span> </div>
-        </div>
+
     
 
     <div className='bg-zinc-900 z-10 flex space-x-16  md:pl-10 text-white w-full md:hidden bottom-0 fixed text-lg font-bold py-2 px-10 underline'>

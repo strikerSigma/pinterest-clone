@@ -66,7 +66,7 @@ const SortSearch = (e) => {
     console.log("filter: ",filter)
   return (
   <div>
-    <div className="relative md:mt-10 mt-16 ">
+    <div className="relative  md:mt-10 mt-16 ">
   <div  className="absolute left-14 top-4 w-5 h-5 text-gray-500"><Image src="/search.png" width={15} height={15}/></div>
   <input onChange={SortSearch}
    type="text" className=" bg-gray-200 rounded-full py-3 pr-28 md:pr-44 lg:pr-96 pl-10 focus:outline-none ml-10 " placeholder="Search..." />
